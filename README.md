@@ -4,5 +4,24 @@
 
 #Teslo API
 
-1. Levantar la base de datos
-```docker-compose up -d```
+1. Clonar el proyecto
+
+2. `npm install`
+
+3. Agregar archivo .env
+
+4. Agregar variables de entorno
+
+```
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=teslo
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
+```
+
+5. Levantar la base de datos
+
+```
+docker-compose up -d
+```
