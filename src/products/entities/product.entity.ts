@@ -1,0 +1,56 @@
+//representacion de la tabla de la base de datos
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+
+@Entity()
+export class Product {
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
+  @Column('text', {
+    unique: true,
+  })
+  title!: string;
+  @Column('float', {
+    default: 0,
+  })
+  price!: number;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  description?: string;
+
+  @Column('text', {
+    unique: true,
+  })
+  slug!: string;
+
+  @Column({
+    type: 'int',
+    default: 0,
+  })
+  stock!: number;
+
+  @Column({
+    type: 'text',
+    array: true,
+  })
+  sizes!: string[];
+
+  @Column({
+    type: 'text',
+  })
+  gender!: string;
+
+  //Antes de insertar un nuevo producto, se verifica si el slug está vacío. Si es así, se asigna el título del producto al slug. Luego, se formatea el slug convirtiéndolo a minúsculas, reemplazando los espacios por guiones bajos y eliminando los apóstrofes. Esto asegura que el slug sea único y esté en un formato adecuado para su uso en URLs.
+  @BeforeInsert()
+  checkSlugInsert() {
+    if (!this.slug) {
+      this.slug = this.title;
+    }
+    this.slug = this.slug
+      .toLowerCase()
+      .replaceAll(' ', '_')
+      .replaceAll("'", '');
+  }
+}
