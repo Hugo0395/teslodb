@@ -1,5 +1,11 @@
 //representacion de la tabla de la base de datos
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  BeforeUpdate,
+} from 'typeorm';
 
 @Entity()
 export class Product {
@@ -52,5 +58,16 @@ export class Product {
       .toLowerCase()
       .replaceAll(' ', '_')
       .replaceAll("'", '');
+  }
+
+  @BeforeUpdate()
+  checkSlugUpdate() {
+    this.slug = this.slug
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // quita acentos
+      .replace(/[^a-z0-9\s]/g, '') // elimina símbolos
+      .trim()
+      .replace(/\s+/g, '_'); // espacios → _
   }
 }
