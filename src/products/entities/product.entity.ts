@@ -63,8 +63,10 @@ export class Product {
   // cascade: true: Cuando se elimina un Product, automáticamente se eliminan todas sus imágenes asociadas
   @OneToMany(() => ProductImage, (productImage) => productImage.product, {
     cascade: true,
+    // eager: true: Carga las imágenes asociadas al producto en la consulta del producto, lo que facilita el acceso a las imágenes sin necesidad de realizar consultas adicionales.
+    eager: true,
   })
-  images?: ProductImage;
+  images?: ProductImage[];
 
   //Antes de insertar un nuevo producto, se verifica si el slug está vacío. Si es así, se asigna el título del producto al slug. Luego, se formatea el slug convirtiéndolo a minúsculas, reemplazando los espacios por guiones bajos y eliminando los apóstrofes. Esto asegura que el slug sea único y esté en un formato adecuado para su uso en URLs.
   @BeforeInsert()

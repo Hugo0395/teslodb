@@ -3,6 +3,7 @@ import { Product } from './product.entity';
 
 @Entity()
 export class ProductImage {
+  //la imagen tendrá un id único generado automáticamente
   @PrimaryGeneratedColumn()
   id!: number;
   @Column('text')
