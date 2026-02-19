@@ -5,7 +5,9 @@ import {
   PrimaryGeneratedColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from 'typeorm';
+import { ProductImage } from './product-image.entity';
 
 @Entity()
 export class Product {
@@ -54,6 +56,14 @@ export class Product {
     default: [],
   })
   tags!: string[];
+
+  // @OneToMany(
+  //   () => ProductImage,
+  //   (productImage) => productImage.product,
+  //   {
+  //   cascade: true,
+  // })
+  // images?: ProductImage;
 
   //Antes de insertar un nuevo producto, se verifica si el slug está vacío. Si es así, se asigna el título del producto al slug. Luego, se formatea el slug convirtiéndolo a minúsculas, reemplazando los espacios por guiones bajos y eliminando los apóstrofes. Esto asegura que el slug sea único y esté en un formato adecuado para su uso en URLs.
   @BeforeInsert()

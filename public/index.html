@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teslo Shop - API Documentation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="logo-section">
+            <h1 class="logo">
+              <span class="logo-icon">⚡</span>
+              Teslo Shop API
+            </h1>
+            <p class="tagline">Documentación de API y Configuración</p>
+          </div>
+          <div class="status-badge" id="statusBadge">
+            <span class="status-dot"></span>
+            <span id="statusText">Verificando...</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Navigation Tabs -->
+      <nav class="tabs-navigation">
+        <button class="tab-button active" data-tab="inicio">
+          <span class="tab-icon">📖</span>
+          Inicio
+        </button>
+        <button class="tab-button" data-tab="apis">
+          <span class="tab-icon">🔌</span>
+          APIs & Endpoints
+        </button>
+        <button class="tab-button" data-tab="info">
+          <span class="tab-icon">ℹ️</span>
+          Información
+        </button>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="content">
+        <!-- Tab: Inicio -->
+        <section class="tab-content active" id="tab-inicio">
+          <div class="section-title">
+            <h2>Bienvenido a Teslo Shop</h2>
+            <p class="section-subtitle">Guía de inicio rápido del proyecto</p>
+          </div>
+
+          <div class="content-grid">
+            <div class="card">
+              <div class="card-header">
+                <h3>📋 Requisitos Previos</h3>
+              </div>
+              <div class="card-body">
+                <ul class="list">
+                  <li>Node.js v18 o superior</li>
+                  <li>npm o yarn</li>
+                  <li>Docker (para PostgreSQL)</li>
+                  <li>Git</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>⚙️ Instalación</h3>
+              </div>
+              <div class="card-body">
+                <ol class="list">
+                  <li>Clonar el repositorio:
+                    <div class="code-block">git clone &lt;repo-url&gt;</div>
+                  </li>
+                  <li>Instalar dependencias:
+                    <div class="code-block">npm install</div>
+                  </li>
+                  <li>Crear archivo <code>.env</code> en la raíz del proyecto</li>
+                  <li>Configurar variables de entorno (ver más abajo)</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>🔐 Variables de Entorno</h3>
+              </div>
+              <div class="card-body">
+                <p class="subtitle">Crear archivo <code>.env</code> en la raíz:</p>
+                <div class="code-block large">
+                  <span class="code-line">DB_HOST=localhost</span>
+                  <span class="code-line">DB_PORT=5432</span>
+                  <span class="code-line">DB_NAME=teslo</span>
+                  <span class="code-line">DB_USERNAME=postgres</span>
+                  <span class="code-line">DB_PASSWORD=postgres</span>
+                  <span class="code-line">PORT=3000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>🐳 Base de Datos</h3>
+              </div>
+              <div class="card-body">
+                <p class="subtitle">Ejecutar Docker Compose:</p>
+                <div class="code-block">docker-compose up -d</div>
+                <p class="subtitle" style="margin-top: 12px;">Esperar a que PostgreSQL esté listo (puede tomar unos segundos)</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>🚀 Iniciar el Servidor</h3>
+              </div>
+              <div class="card-body">
+                <p class="subtitle">Modo desarrollo (con watch):</p>
+                <div class="code-block">npm run start:dev</div>
+                <p class="subtitle" style="margin-top: 12px;">El servidor estará disponible en:</p>
+                <div class="code-block">http://localhost:3000</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>📦 Comandos Útiles</h3>
+              </div>
+              <div class="card-body">
+                <ul class="list">
+                  <li><code>npm run build</code> - Compilar el proyecto</li>
+                  <li><code>npm run start:prod</code> - Ejecutar en producción</li>
+                  <li><code>npm run lint</code> - Ejecutar linter</li>
+                  <li><code>npm run format</code> - Formatear código</li>
+                  <li><code>npm test</code> - Ejecutar tests</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab: APIs & Endpoints -->
+        <section class="tab-content" id="tab-apis">
+          <div class="section-title">
+            <h2>APIs & Endpoints</h2>
+            <p class="section-subtitle">Documentación detallada de todos los endpoints disponibles</p>
+          </div>
+
+          <div class="endpoints-container">
+            <!-- Products Endpoints -->
+            <div class="endpoint-section">
+              <h3 class="endpoint-section-title">🛍️ Productos</h3>
+              <p class="endpoint-section-description">Gestión de productos en la tienda</p>
+
+              <!-- GET ALL -->
+              <div class="endpoint-card">
+                <div class="endpoint-header">
+                  <span class="method-badge get">GET</span>
+                  <span class="endpoint-path">/api/products</span>
+                </div>
+                <div class="endpoint-body">
+                  <p class="endpoint-description">Obtiene la lista de todos los productos con paginación</p>
+                  
+                  <div class="endpoint-section-small">
+                    <h5>Parámetros de Query:</h5>
+                    <div class="param-table">
+                      <div class="param-row">
+                        <div class="param-name">limit</div>
+                        <div class="param-type">number</div>
+                        <div class="param-desc">Número de resultados por página</div>
+                      </div>
+                      <div class="param-row">
+                        <div class="param-name">offset</div>
+                        <div class="param-type">number</div>
+                        <div class="param-desc">Número de resultados a saltar</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="endpoint-section-small">
+                    <h5>Respuesta Exitosa:</h5>
+                    <div class="code-block small">
+                      <span class="code-line">{</span>
+                      <span class="code-line indent1">"data": [{ "id": "uuid", "title": "...", "price": 0 }],</span>
+                      <span class="code-line indent1">"total": 0</span>
+                      <span class="code-line">}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- GET ONE -->
+              <div class="endpoint-card">
+                <div class="endpoint-header">
+                  <span class="method-badge get">GET</span>
+                  <span class="endpoint-path">/api/products/:term</span>
+                </div>
+                <div class="endpoint-body">
+                  <p class="endpoint-description">Busca un producto por ID o nombre</p>
+                  
+                  <div class="endpoint-section-small">
+                    <h5>Parámetros:</h5>
+                    <div class="param-table">
+                      <div class="param-row">
+                        <div class="param-name">term</div>
+                        <div class="param-type">string</div>
+                        <div class="param-desc">UUID del producto o nombre para búsqueda</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="endpoint-section-small">
+                    <h5>Respuesta:</h5>
+                    <div class="code-block small">
+                      <span class="code-line">{</span>
+                      <span class="code-line indent1">"id": "uuid",</span>
+                      <span class="code-line indent1">"title": "Producto",</span>
+                      <span class="code-line indent1">"price": 99.99</span>
+                      <span class="code-line">}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- POST -->
+              <div class="endpoint-card">
+                <div class="endpoint-header">
+                  <span class="method-badge post">POST</span>
+                  <span class="endpoint-path">/api/products</span>
+                </div>
+                <div class="endpoint-body">
+                  <p class="endpoint-description">Crea un nuevo producto</p>
+                  
+                  <div class="endpoint-section-small">
+                    <h5>Body (JSON):</h5>
+                    <div class="code-block small">
+                      <span class="code-line">{</span>
+                      <span class="code-line indent1">"title": "Nombre del producto",</span>
+                      <span class="code-line indent1">"price": 99.99,</span>
+                      <span class="code-line indent1">"description": "Descripción",</span>
+                      <span class="code-line indent1">"stock": 10</span>
+                      <span class="code-line">}</span>
+                    </div>
+                  </div>
+
+                  <div class="endpoint-section-small">
+                    <h5>Status: 201 Created</h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PATCH -->
+              <div class="endpoint-card">
+                <div class="endpoint-header">
+                  <span class="method-badge patch">PATCH</span>
+                  <span class="endpoint-path">/api/products/:id</span>
+                </div>
+                <div class="endpoint-body">
+                  <p class="endpoint-description">Actualiza un producto existente</p>
+                  
+                  <div class="endpoint-section-small">
+                    <h5>Parámetros:</h5>
+                    <div class="param-table">
+                      <div class="param-row">
+                        <div class="param-name">id</div>
+                        <div class="param-type">UUID</div>
+                        <div class="param-desc">ID del producto a actualizar</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="endpoint-section-small">
+                    <h5>Body (JSON) - Campos opcionales:</h5>
+                    <div class="code-block small">
+                      <span class="code-line">{</span>
+                      <span class="code-line indent1">"title": "Nuevo nombre",</span>
+                      <span class="code-line indent1">"price": 129.99</span>
+                      <span class="code-line">}</span>
+                    </div>
+                  </div>
+
+                  <div class="endpoint-section-small">
+                    <h5>Status: 200 OK</h5>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DELETE -->
+              <div class="endpoint-card">
+                <div class="endpoint-header">
+                  <span class="method-badge delete">DELETE</span>
+                  <span class="endpoint-path">/api/products/:id</span>
+                </div>
+                <div class="endpoint-body">
+                  <p class="endpoint-description">Elimina un producto</p>
+                  
+                  <div class="endpoint-section-small">
+                    <h5>Parámetros:</h5>
+                    <div class="param-table">
+                      <div class="param-row">
+                        <div class="param-name">id</div>
+                        <div class="param-type">UUID</div>
+                        <div class="param-desc">ID del producto a eliminar</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="endpoint-section-small">
+                    <h5>Status: 200 OK</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tab: Información -->
+        <section class="tab-content" id="tab-info">
+          <div class="section-title">
+            <h2>Información del Sistema</h2>
+            <p class="section-subtitle">Estado y detalles del servidor</p>
+          </div>
+
+          <div class="info-grid">
+            <!-- Server Status -->
+            <div class="info-card">
+              <div class="info-card-header">
+                <h3>🖥️ Estado del Servidor</h3>
+              </div>
+              <div class="info-card-body">
+                <div class="info-item">
+                  <span class="info-label">Estado:</span>
+                  <span class="info-value" id="serverStatus">
+                    <span class="loading-spinner"></span> Verificando...
+                  </span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">URL:</span>
+                  <span class="info-value">http://localhost:3000</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Prefix API:</span>
+                  <span class="info-value">/api</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Version -->
+            <div class="info-card">
+              <div class="info-card-header">
+                <h3>📦 Versión</h3>
+              </div>
+              <div class="info-card-body">
+                <div class="info-item">
+                  <span class="info-label">Versión del Proyecto:</span>
+                  <span class="info-value">v0.0.1</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Framework:</span>
+                  <span class="info-value">NestJS 11.0.1</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Base de Datos:</span>
+                  <span class="info-value">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Documentation Links -->
+            <div class="info-card">
+              <div class="info-card-header">
+                <h3>🔗 Enlaces Útiles</h3>
+              </div>
+              <div class="info-card-body">
+                <div class="link-item">
+                  <a href="http://localhost:3000/api/docs" target="_blank" class="link-button primary">
+                    <span>📚 Documentación Swagger</span>
+                    <span class="external-icon">↗</span>
+                  </a>
+                </div>
+                <div class="link-item">
+                  <a href="http://localhost:3000" target="_blank" class="link-button secondary">
+                    <span>🏠 API Raíz</span>
+                    <span class="external-icon">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Environment -->
+            <div class="info-card">
+              <div class="info-card-header">
+                <h3>⚙️ Configuración</h3>
+              </div>
+              <div class="info-card-body">
+                <div class="info-item">
+                  <span class="info-label">Node.js:</span>
+                  <span class="info-value">v18+</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">npm:</span>
+                  <span class="info-value">Compatible</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Docker:</span>
+                  <span class="info-value">Requerido para BD</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p>&copy; 2024 Teslo Shop. Todos los derechos reservados.</p>
+        <p class="footer-update">Última actualización: <span id="updateTime">-</span></p>
+      </footer>
+    </div>
+
+    <script>
+      // Tab Navigation
+      document.querySelectorAll('.tab-button').forEach(button => {
+        button.addEventListener('click', () => {
+          const tabName = button.getAttribute('data-tab');
+          
+          // Remove active from all buttons and contents
+          document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          
+          // Add active to clicked button and corresponding content
+          button.classList.add('active');
+          document.getElementById(`tab-${tabName}`).classList.add('active');
+        });
+      });
+
+      // Check server status
+      async function checkServerStatus() {
+        try {
+          const response = await fetch('http://localhost:3000/api/products', {
+            method: 'GET',
+          });
+          
+          if (response.ok || response.status === 400) {
+            document.getElementById('statusBadge').classList.add('online');
+            document.getElementById('statusText').textContent = 'Servidor En Línea';
+            document.getElementById('serverStatus').innerHTML = '<span class="status-online">✓ En Línea</span>';
+          } else {
+            throw new Error('Server not responding');
+          }
+        } catch (error) {
+          document.getElementById('statusBadge').classList.remove('online');
+          document.getElementById('statusBadge').classList.add('offline');
+          document.getElementById('statusText').textContent = 'Servidor Desconectado';
+          document.getElementById('serverStatus').innerHTML = '<span class="status-offline">✗ Desconectado</span>';
+        }
+      }
+
+      // Update timestamp
+      function updateTimestamp() {
+        const now = new Date();
+        document.getElementById('updateTime').textContent = now.toLocaleString('es-ES');
+      }
+
+      // Initialize on load
+      window.addEventListener('load', () => {
+        checkServerStatus();
+        updateTimestamp();
+        // Check every 30 seconds
+        setInterval(checkServerStatus, 30000);
+      });
+    </script>
+  </body>
+</html>
