@@ -57,13 +57,14 @@ export class Product {
   })
   tags!: string[];
 
-  // @OneToMany(
-  //   () => ProductImage,
-  //   (productImage) => productImage.product,
-  //   {
-  //   cascade: true,
-  // })
-  // images?: ProductImage;
+  // Relación OneToMany: Un producto puede tener muchas imágenes
+  // () => ProductImage: Especifica la entidad relacionada
+  // (productImage) => productImage.product: La propiedad inversa en ProductImage que referencia este Product
+  // cascade: true: Cuando se elimina un Product, automáticamente se eliminan todas sus imágenes asociadas
+  @OneToMany(() => ProductImage, (productImage) => productImage.product, {
+    cascade: true,
+  })
+  images?: ProductImage;
 
   //Antes de insertar un nuevo producto, se verifica si el slug está vacío. Si es así, se asigna el título del producto al slug. Luego, se formatea el slug convirtiéndolo a minúsculas, reemplazando los espacios por guiones bajos y eliminando los apóstrofes. Esto asegura que el slug sea único y esté en un formato adecuado para su uso en URLs.
   @BeforeInsert()
